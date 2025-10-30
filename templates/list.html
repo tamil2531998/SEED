@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Directory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='user_style.css') }}">
+  <link rel="stylesheet" href="/static/list_style.css">
+</head>
+<body>
+ <!-- ===== HEADER ===== -->
+  <header>
+    <h1><img src="/static/iogo.png" alt="Logo"></h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+        <li><a href="{{ url_for('form') }}" class="active">📝 Register</a></li>
+        <li><a href="{{ url_for('list_users') }}">📋 List</a></li>
+        <li><a href="{{ url_for('photo_gallery') }}">📸 Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}">📞 Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+<div class="container">
+
+  <h1>User Directory</h1>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by Name or Category...">
+  </div>
+
+  <div class="user-grid" id="userGrid">
+    {% for user in users %}
+    <div class="user-card">
+      {% if user[8] %}
+        <img src="{{ url_for('static', filename='uploads/' ~ user[8]) }}" class="user-photo" alt="User Photo">
+      {% else %}
+        <div class="no-photo">No Image</div>
+      {% endif %}
+      <div class="user-name">{{ user[2] }}</div>
+      <div class="user-category">{{ user[7] }}</div>
+      <div class="user-info">ID: {{ user[0] }} | Reg: {{ user[1] }}</div>
+      <div class="user-info">Email: {{ user[3] }}</div>
+      <div class="user-info">Phone: {{ user[4] }}</div>
+      <div class="user-info">Dept: {{ user[5] }}</div>
+      <div class="user-info">Date: {{ user[6] }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.getElementById("searchInput").addEventListener("keyup", function () {
+    const filter = this.value.toLowerCase();
+    const cards = document.querySelectorAll("#userGrid .user-card");
+
+    cards.forEach(card => {
+      const name = card.querySelector(".user-name").textContent.toLowerCase();
+      const category = card.querySelector(".user-category").textContent.toLowerCase();
+      card.style.display = name.includes(filter) || category.includes(filter) ? "" : "none";
+    });
+  });
+</script>
+
+</body>
+</html>

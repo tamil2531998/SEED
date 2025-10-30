@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Digital Registration Portal</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='contact_style.css') }}">
+  <link rel="stylesheet" href="/static/contact_style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1><img src="/static/iogo.png" alt="Logo"></h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+        <li><a href="{{ url_for('form') }}">📝 Register</a></li>
+        <li><a href="{{ url_for('list_users') }}">📋 List</a></li>
+        <li><a href="{{ url_for('photo_gallery') }}">📸 Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}" class="active">📞 Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2>📬 Get in Touch</h2>
+      <p>Have any questions or feedback? We’d love to hear from you. Fill out the form below and our team will get back to you soon!</p>
+
+      <form method="POST" action="{{ url_for('contact') }}">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 Digital Registration Portal | Designed with 💖 by Tamilarasan</p>
+  </footer>
+
+</body>
+</html>
